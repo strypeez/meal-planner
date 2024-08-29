@@ -1,4 +1,6 @@
-export let recipes = [
+import { Recipe } from "../stores/planner-store"
+
+export let defaultRecipes: Recipe[] = [
     {
         id: '1',
         name: "Mapo Tofu",
@@ -44,7 +46,8 @@ export let recipes = [
                 quantity: {
                     number: 1,
                     measurement: 'bottle'
-                }
+                },
+                isList: true
             }
         ]
     }

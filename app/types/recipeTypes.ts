@@ -6,6 +6,7 @@ type Recipe = {
 }
 
 type Ingredient = {
+    id: string
     name: string
     quantity: {
         number: number
