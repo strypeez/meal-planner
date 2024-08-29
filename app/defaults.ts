@@ -50,3 +50,49 @@ export let recipes = [
     }
 ]
 
+export let defaultPlanner = [
+    {
+        id: '1',
+        name: 'Monday',
+        short: 'Mon',
+        meals: []
+    },
+    {
+        id: '2',
+        name: 'Tuesday',
+        short: 'Tue',
+        meals: []
+    },
+    {
+        id: '3',
+        name: 'Wednesday',
+        short: 'Wed',
+        meals: []
+    },
+    {
+        id: '4',
+        name: 'Thursday',
+        short: 'Thu',
+        meals: [],
+    },
+    {
+        id: '5',
+        name: 'Friday',
+        short: 'Fri',
+        meals: []
+    },
+    {
+        id: '6',
+        name: 'Saturday',
+        short: 'Sat',
+        meals: []
+    },
+    {
+        id: '7',
+        name: 'Sunday',
+        short: 'Sun',
+        meals: []
+    },
+
+]
+
