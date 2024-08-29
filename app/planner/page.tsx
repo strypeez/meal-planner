@@ -1,4 +1,5 @@
 import { defaultPlanner } from "../defaults";
+import PlannerDrop from "./components/plannerDrop";
 
 function createPlanner() {
   return <div className="flex flex-col">
@@ -9,7 +10,9 @@ function createPlanner() {
           <div className="flex">
             <div>
               <div className="border-b border-black p-3 border-r">Breakfast</div>
-              <div className="p-3 border-r border-black">EMPTY</div>
+              <div className="p-3 border-r border-black">
+                <PlannerDrop />
+              </div>
             </div>
             <div>
               <div className="border-b border-black p-3 border-r">Lunch</div>
@@ -28,7 +31,7 @@ function createPlanner() {
 
 export default function Planner() {
     return (
-      <main className="flex min-h-screen pt-10 flex-col items-center">
+      <main className="flex min-h-screen p-10 flex-col items-center">
         <div>This is the planner page</div>
         {createPlanner()}
       </main>
