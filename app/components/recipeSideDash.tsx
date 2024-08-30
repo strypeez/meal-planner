@@ -13,7 +13,8 @@ export default function RecipeSideDash() {
             className={`${isOpen ? 'block' : 'hidden'} absolute min-h-screen border-r overflow-hidden border-black relative`}>
             <div className="p-3 border-b border-black">Recipes</div>
             <div>
-                {recipes.map((recipe) => {
+                {Object.keys(recipes).map((recipeId) => {
+                    let recipe = recipes[recipeId]
                     return <RecipeTile key={recipe.id} recipe={recipe}/>
                 })}
             </div>

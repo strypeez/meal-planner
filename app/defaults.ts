@@ -1,7 +1,8 @@
 import { Recipe } from "../stores/planner-store"
+import { Day } from "../stores/planner-store"
 
-export let defaultRecipes: Recipe[] = [
-    {
+export let defaultRecipes: { [key: string]: Recipe}= {
+    '1': {
         id: '1',
         name: "Mapo Tofu",
         servings: 3,
@@ -26,7 +27,7 @@ export let defaultRecipes: Recipe[] = [
             }
         ]
     },
-    {
+    '4':{
         id: '4',
         name: 'Bacon Pasta',
         servings: 3,
@@ -51,50 +52,64 @@ export let defaultRecipes: Recipe[] = [
             }
         ]
     }
-]
+}
 
-export let defaultPlanner = [
+export let defaultPlanner: Day[] = [
     {
         id: '1',
         name: 'Monday',
         short: 'Mon',
-        meals: []
+        breakfast: [],
+        lunch: [],
+        dinner: []
     },
     {
         id: '2',
         name: 'Tuesday',
         short: 'Tue',
-        meals: []
+        breakfast: [],
+        lunch: [],
+        dinner: []
     },
     {
         id: '3',
         name: 'Wednesday',
         short: 'Wed',
-        meals: []
+        breakfast: [],
+        lunch: [],
+        dinner: []
     },
     {
         id: '4',
         name: 'Thursday',
         short: 'Thu',
-        meals: [],
+        breakfast: [],
+        lunch: [],
+        dinner: []
     },
     {
         id: '5',
         name: 'Friday',
         short: 'Fri',
-        meals: []
+        breakfast: [],
+        lunch: [],
+        dinner: []
     },
     {
         id: '6',
         name: 'Saturday',
         short: 'Sat',
-        meals: []
+        breakfast: [],
+        lunch: [],
+        dinner: []
     },
     {
         id: '7',
         name: 'Sunday',
         short: 'Sun',
-        meals: []
+        breakfast: [],
+        lunch: [],
+        dinner: []
     },
 
 ]

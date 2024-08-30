@@ -11,7 +11,7 @@ export function RecipeTile({recipe}: RecipeTileProps) {
     const [{isDragging}, drag] = useDrag(() => ({
         type: ItemTypes.RECIPE,
         item: {
-            name: recipe.name
+            id: recipe.id
         },
         collect: monitor => ({
             isDragging: !!monitor.isDragging(),
