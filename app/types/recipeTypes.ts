@@ -5,7 +5,7 @@ type Recipe = {
     ingredients: Ingredient[]
 }
 
-type Ingredient = {
+export type Ingredient = {
     id: string
     name: string
     quantity: {

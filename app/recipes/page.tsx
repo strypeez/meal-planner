@@ -13,7 +13,6 @@ export default function Recipes() {
   } = useForm()
   const { addRecipe } = usePlannerStore((state) => state)
   const onSubmit = (data) => {
-    console.log('this is onSubmit data', data),
     addRecipe({
       id: uuidv4(),
       ...data,

@@ -18,7 +18,6 @@ export default function PlannerDrop({day, meal, meals}: PlannerDropProps) {
         accept: ItemTypes.RECIPE,
         drop: (item: {id: string}) => {
             addMeal(day, meal, getRecipe(item.id))
-            console.log('this is meals', meals)
         },
         collect: monitor => ({
             isOver: !!monitor.isOver(),

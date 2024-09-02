@@ -1,6 +1,7 @@
 'use client'
 
 import type { Metadata } from "next";
+import Header from "./components/header";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import RecipeSideDash from "./components/recipeSideDash";
@@ -29,6 +30,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div className="flex">
+        <Header />
         <PlannerStoreProvider>
           <DndProvider backend={HTML5Backend}>
             <RecipeSideDash />
