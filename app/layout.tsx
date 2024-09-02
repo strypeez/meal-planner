@@ -29,14 +29,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="flex">
+        <div className="flex flex-col">
         <Header />
-        <PlannerStoreProvider>
-          <DndProvider backend={HTML5Backend}>
-            <RecipeSideDash />
-            {children} 
-          </DndProvider>
-        </PlannerStoreProvider>
+        <div className="flex">
+          <PlannerStoreProvider>
+            <DndProvider backend={HTML5Backend}>
+              <RecipeSideDash />
+              {children} 
+            </DndProvider>
+          </PlannerStoreProvider>
+        </div>
         </div>
       </body>
     </html>
