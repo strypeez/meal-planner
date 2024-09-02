@@ -28,6 +28,7 @@ export type PlannerState = {
 export type PlannerActions = {
   showRecipes: () => void
   getRecipe: (id:string) => Recipe
+  addRecipe: (recipe: Recipe) => void
   addMeal: (day: number, meal: string, recipe: Recipe) => void
 }
 
@@ -45,6 +46,10 @@ export const createPlannerStore = (
     ...initState,
     showRecipes: () => set((state) => ({ ...state, recipes: state.recipes })),
     getRecipe:(id:string) => get().recipes[id],
+    addRecipe: (recipe: Recipe) => set((state) => ({...state, recipes: {
+      ...state.recipes,
+      [recipe.id]: recipe
+    }})),
     addMeal:(day: number, meal: string, recipe: Recipe) => set((state) => ({
         ...state,
         planner: state.planner.map((sDay, index: number) => {
