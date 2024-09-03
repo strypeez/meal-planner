@@ -29,6 +29,7 @@ export type PlannerActions = {
   showRecipes: () => void
   getRecipe: (id:string) => Recipe
   addRecipe: (recipe: Recipe) => void
+  removeMeal: (day: number, meal: string, mIndex: number) => void
   addMeal: (day: number, meal: string, recipe: Recipe) => void
 }
 
@@ -50,6 +51,16 @@ export const createPlannerStore = (
       ...state.recipes,
       [recipe.id]: recipe
     }})),
+    removeMeal:(day: number, meal: string, mIndex: number) => set((state) => ({
+        ...state,
+        planner: state.planner.map((sDay, index: number) => {
+            if (index !== day) return sDay
+            return {
+                ...sDay,
+                [meal]: (sDay[meal] as Recipe[]).filter(( meal ,index) => { return index !== mIndex})
+            }
+        } )
+    })),
     addMeal:(day: number, meal: string, recipe: Recipe) => set((state) => ({
         ...state,
         planner: state.planner.map((sDay, index: number) => {

@@ -3,6 +3,7 @@ import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
 import { v4 as uuidv4 } from 'uuid';
 import { useState } from "react";
 import { usePlannerStore } from "../../providers/planner-store-provider";
+import RecipeList from "./components/recipeList";
 
 type Inputs = {
   name: string
@@ -65,7 +66,7 @@ export default function Recipes() {
         </form>
         <div>
           {Object.keys(recipes).map((recipe, index) => {
-            return <div className="border border-black p-4 my-2" key={index}>{recipes[recipe].name}</div>
+            return <RecipeList key={index} recipe={recipes[recipe]} />
           })}
         </div>
       </div>
