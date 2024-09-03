@@ -68,15 +68,15 @@ function getTotalIngredients(planner: Day[]) {
 }
 
 export default function Shopping() {
-  const { planner, recipes } = usePlannerStore((state) => state);
+  const { planner } = usePlannerStore((state) => state);
   let totals = getTotalIngredients(planner);
   return (
-    <main className="flex min-h-screen flex-col items-center p-14">
-      <div>Shopping List</div>
+    <main className="flex min-h-screen flex-col items-left p-12 max-w-[500px] w-full">
+      <h1 className="font-bold text-[24px]">Shopping List</h1>
       {
         Object.keys(totals).map((total, index) => {
-          return <div key={index}>
-            <input type="checkbox" id={`${total}check`}></input> <span>{totals[total].quantity.number} {totals[total].quantity.measurement} of {total}</span>
+          return <div className="pr-3 pt-3 pb-3 flex" key={index}>
+            <input className="w-6 h-6" type="checkbox" id={`${total}check`}></input> <span className="pl-3">{totals[total].quantity.number} {totals[total].quantity.measurement} of {total}</span>
           </div>
         })
       }

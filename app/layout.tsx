@@ -34,7 +34,6 @@ export default function RootLayout({
         <div className="flex">
           <PlannerStoreProvider>
             <DndProvider backend={HTML5Backend}>
-              <RecipeSideDash />
               {children} 
             </DndProvider>
           </PlannerStoreProvider>

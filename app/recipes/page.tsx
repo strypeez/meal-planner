@@ -1,6 +1,7 @@
 'use client'
 import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
 import { v4 as uuidv4 } from 'uuid';
+import { useState } from "react";
 import { usePlannerStore } from "../../providers/planner-store-provider";
 
 type Inputs = {
@@ -10,8 +11,9 @@ type Inputs = {
 export default function Recipes() {
   const {
     register, control, handleSubmit, formState: {errors},
-  } = useForm()
-  const { addRecipe } = usePlannerStore((state) => state)
+  } = useForm();
+  const [showForm, setShowForm] = useState(false);
+  const { addRecipe, recipes } = usePlannerStore((state) => state)
   const onSubmit = (data) => {
     addRecipe({
       id: uuidv4(),
@@ -25,35 +27,48 @@ export default function Recipes() {
   })
 
   return (
-    <main className="flex min-h-screen flex-col items-center p-24">
-      <div>This is the recipes page</div>
-      <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
-        <div className="mb-3">
-          <label>Recipe Name</label>
-          <input defaultValue="First recipe" {...register("name")} />
+    <main className="flex min-h-screen flex-col items-center p-12 w-full h-full">
+      <div className="max-w-[800px] w-full">
+        <div className="flex justify-between w-full">
+          <h1 className="font-bold text-[24px]">Recipes</h1>
+          <button onClick={()=>{setShowForm(!showForm)}} className="p-2 border border-black">Add Recipe</button>
         </div>
-        <div className="mb-3">
-          <label>Servings</label>
-          <input defaultValue="1" {...register("servings")} />
-        </div>
-        <div><label>Ingredients</label>         <div className="p-2 border border-black" onClick={() => {append({name: '', measure: '', quantity: ''})}}>Add Ingredient</div></div>
-        {fields.map((field, index) => (
-          <div className="mb-5" key={field.id}>
-            <div className="flex flex-col">
-              <label>Ingredient</label>
-              <input className="mb-2" key={`name${field.id}`} {...register(`ingredients.${index}.name`)} />
-            </div>
-            <div className="flex flex-col">
-              <label>Measurements</label>
-              <div className="flex">
-                <input key={`quantity${field.id}`} {...register(`ingredients.${index}.quantity`)} />
-                <input className="ml-2" key={`measure${field.id}`} {...register(`ingredients.${index}.measure`)} />
+        <form className={`flex flex-col w-full mt-2 border border-black p-3 ${showForm ? '' : 'hidden'}`} onSubmit={handleSubmit(onSubmit)}>
+          <div className="mb-3 flex flex-col">
+            <label className="mb-1">Recipe Name</label>
+            <input className="p-2" defaultValue="First recipe" {...register("name")} />
+          </div>
+          <div className="mb-3 flex flex-col">
+            <label className="mb-1">Servings</label>
+            <input className="p-2" defaultValue="1" {...register("servings")} />
+          </div>
+          <div className="flex justify-between">
+            <div>Ingredients</div>
+            <div className="p-2 border border-black" onClick={() => {append({name: '', measure: '', quantity: ''})}}>Add Ingredient</div>
+          </div>
+          {fields.map((field, index) => (
+            <div className="mb-5" key={field.id}>
+              <div className="flex flex-col">
+                <label>Ingredient</label>
+                <input className="mb-2" key={`name${field.id}`} {...register(`ingredients.${index}.name`)} />
+              </div>
+              <div className="flex flex-col">
+                <label>Measurements</label>
+                <div className="flex">
+                  <input key={`quantity${field.id}`} {...register(`ingredients.${index}.quantity`)} />
+                  <input className="ml-2" key={`measure${field.id}`} {...register(`ingredients.${index}.measure`)} />
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-        <input className="p-3 border border-black mt-3" type="submit"/>
-      </form>
+          ))}
+          <input className="p-3 border border-black mt-3" type="submit"/>
+        </form>
+        <div>
+          {Object.keys(recipes).map((recipe, index) => {
+            return <div className="border border-black p-4 my-2" key={index}>{recipes[recipe].name}</div>
+          })}
+        </div>
+      </div>
     </main>
   );
 }

@@ -23,10 +23,10 @@ export default function PlannerDrop({day, meal, meals}: PlannerDropProps) {
             isOver: !!monitor.isOver(),
         })
     }), [meals])
-    return <div ref={drop} className="p-3">
+    return <div ref={drop} className="p-3 flex flex-col">
         {
-            meals.length === 0 ? <div>EMPTY</div> : meals.map((meal, index) => {
-                return <div key={`${meal.id}${index}`}>
+            meals.length === 0 ? <div className="w-24 h-8"></div> : meals.map((meal, index) => {
+                return <div className="w-24 h-8" key={`${meal.id}${index}`}>
                     {meal.name}
                 </div>
             })

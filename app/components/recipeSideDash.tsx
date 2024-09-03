@@ -10,7 +10,7 @@ export default function RecipeSideDash() {
     return <div className="relative min-h-screen">
         <div 
             className={`${isOpen ? 'block' : 'hidden'} absolute min-h-screen border-r overflow-hidden border-black relative`}>
-            <div className="p-3 border-b border-black">Recipes</div>
+            <div className="p-2 border-b border-black font-bold text-[16px]">Recipes</div>
             <div>
                 {Object.keys(recipes).map((recipeId) => {
                     let recipe = recipes[recipeId]
