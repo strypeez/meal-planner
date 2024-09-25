@@ -5,6 +5,7 @@ import { usePlannerStore } from "../../providers/planner-store-provider";
 import { RecipeTile } from "./recipeTile";
 
 import axios from "axios";
+import { Recipe } from "../../stores/planner-store";
 
 
 export default function RecipeSideDash() {
@@ -30,7 +31,7 @@ export default function RecipeSideDash() {
             <div className="p-2 border-b border-black font-bold text-[16px]">Recipes</div>
             <div>
                 {recipes2.map((recipe) => {
-                    return <RecipeTile key={recipe.id} recipe={recipe}/>
+                    return <RecipeTile key={(recipe as Recipe).id} recipe={recipe}/>
                 })}
             </div>
         </div>

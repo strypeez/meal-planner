@@ -12,12 +12,12 @@ type PlannerDropProps = {
     meal: string,
     meals: Recipe[],
     recipes: Recipe[],
-    daily: boolean
+    daily?: boolean
 }
 
 function getRecipe(recipes: Recipe[], slug: string): Recipe {
     const recipe = recipes.find((recipe) => (recipe.slug === slug))
-    return recipe;
+    return (recipe as Recipe);
 }
 
 export default function PlannerDrop({day, meal, meals, recipes, daily = false}: PlannerDropProps) {

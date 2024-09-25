@@ -8,15 +8,15 @@ import axios from 'axios';
 
 import RecipeSideDash from "../components/recipeSideDash";
 
-function createPlanner(planner, plannerClose, setPlannerClose, clearPlanner, recipes) {
+function createPlanner(planner: any, plannerClose: any, setPlannerClose: any, clearPlanner: any, recipes: any) {
   return <div className="flex flex-col mt-2 items-center">
     <div className="flex pb-2 w-full justify-between"><h1 className="font-bold text-[24px]">Planner</h1><div onClick={()=>{clearPlanner()}} className="px-2 py-1 border border-black">Clear</div></div>
     <div className="max-h-[30rem] border-y border-black overflow-y-auto w-fit">
     {
-      planner.map((day, index) => {
+      planner.map((day: any, index: number) => {
         return <div className="border-x border-b last:border-b-0 last:border-x border-black" key={day.id}>
           <div className={`${plannerClose[index] ? '': 'border-b'} border-black p-2`} onClick={() => {
-            setPlannerClose(plannerClose.map((day, dIndex) => {
+            setPlannerClose(plannerClose.map((day: any, dIndex: number) => {
               if (index === dIndex) {
                 return !day
               }
@@ -51,7 +51,7 @@ function createPlanner(planner, plannerClose, setPlannerClose, clearPlanner, rec
   </div>
 }
 
-function createDayPlanner(plannerData, dayIndex, handlePlannerIndex, recipes) {
+function createDayPlanner(plannerData: any, dayIndex: any, handlePlannerIndex: any, recipes: any) {
   return <div className="flex flex-col max-w-[800px]">
     <div className="flex mt-2 mb-2 justify-between">
       <h1 className="font-bold text-[24px]">Planner</h1>
@@ -104,7 +104,7 @@ export default function Planner() {
       getRecipe();
     }, [])
 
-    const handlePlannerIndex = (newIndex) => {
+    const handlePlannerIndex = (newIndex: number) => {
       if (!(newIndex < 0 || newIndex > 6)) {
         setPlannerIndex(newIndex);
       }

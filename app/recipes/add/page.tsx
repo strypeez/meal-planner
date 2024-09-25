@@ -11,14 +11,16 @@ export default function RecipeAddForm() {
         register, control, handleSubmit, formState: {errors},
       } = useForm({
         defaultValues: {
+          name: 'Recipe',
+          slug: 'recipe-name',
+          image: 'image-url',
+          servings: 2,
           ingredients: [{
             name: 'Default', measure: 'cup', quantity: '1'
           }]
         }
       });
-
-    const { addRecipe, recipes } = usePlannerStore((state) => state)
-    const onSubmit = async (data) => {
+    const onSubmit = async (data: any) => {
         try {
           await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/recipes/create`, {
             params: {
