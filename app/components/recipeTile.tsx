@@ -2,7 +2,7 @@
 import { Recipe } from "../../stores/planner-store"
 
 import { useDrag } from "react-dnd"
-import { ItemTypes } from "../layout"
+import { ItemTypes } from "../../stores/planner-store"
 
 type RecipeTileProps = {
     recipe: Recipe
@@ -18,6 +18,8 @@ export function RecipeTile({recipe}: RecipeTileProps) {
             isDragging: !!monitor.isDragging(),
         }),
     }))
+
+    // @ts-ignore: reactdnd no typescript
     return <div ref={drag} 
         style={{opacity: isDragging ? 0.5 : 1, }} 
         className="border border-black m-4 w-36 h-36">

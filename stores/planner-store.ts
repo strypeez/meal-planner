@@ -3,6 +3,11 @@ import { defaultRecipes, defaultPlanner } from '../app/defaults'
 import { Ingredient } from '../app/types/recipeTypes'
 import { staticGenerationAsyncStorage } from 'next/dist/client/components/static-generation-async-storage-instance'
 
+
+export const ItemTypes = {
+  RECIPE: 'recipe'
+}
+
 export type Recipe = {
     id: string
     name: string
