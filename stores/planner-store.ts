@@ -1,11 +1,15 @@
 import { createStore } from 'zustand/vanilla'
 import { defaultRecipes, defaultPlanner } from '../app/defaults'
+import { Ingredient } from '../app/types/recipeTypes'
+import { staticGenerationAsyncStorage } from 'next/dist/client/components/static-generation-async-storage-instance'
 
 export type Recipe = {
     id: string
     name: string
     servings: number
+    image: string
     ingredients: Ingredient[]
+    slug: string
 }
 
 type TValue = string | Recipe[];
@@ -27,8 +31,10 @@ export type PlannerState = {
 
 export type PlannerActions = {
   showRecipes: () => void
+  clearPlanner: () => void
   getRecipe: (id:string) => Recipe
   addRecipe: (recipe: Recipe) => void
+  editRecipe: (slug: string, recipe: Recipe) => void
   removeMeal: (day: number, meal: string, mIndex: number) => void
   addMeal: (day: number, meal: string, recipe: Recipe) => void
 }
@@ -46,10 +52,18 @@ export const createPlannerStore = (
   return createStore<PlannerStore>()((set, get) => ({
     ...initState,
     showRecipes: () => set((state) => ({ ...state, recipes: state.recipes })),
+    clearPlanner: () => set((state) => ({...state, planner: defaultPlanner})),
     getRecipe:(id:string) => get().recipes[id],
+    editRecipe: (slug: string, recipe: Recipe) => set((state) => ({
+      ...state,
+      recipes: {
+        ...state.recipes,
+        [slug]: recipe,
+      }
+    })),
     addRecipe: (recipe: Recipe) => set((state) => ({...state, recipes: {
       ...state.recipes,
-      [recipe.id]: recipe
+      [recipe.slug]: recipe
     }})),
     removeMeal:(day: number, meal: string, mIndex: number) => set((state) => ({
         ...state,

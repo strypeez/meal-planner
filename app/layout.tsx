@@ -1,14 +1,9 @@
-'use client'
 
-import type { Metadata } from "next";
 import Header from "./components/header";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import RecipeSideDash from "./components/recipeSideDash";
 
-import { PlannerStoreProvider } from "../providers/planner-store-provider";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
+import { WrappedComponents } from "./components/wrappedComponents";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,15 +23,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <div className="flex flex-col">
+      <body className={`${inter.className} flex w-screen`}>
+        <div className="flex flex-col grow">
         <Header />
-        <div className="flex">
-          <PlannerStoreProvider>
-            <DndProvider backend={HTML5Backend}>
-              {children} 
-            </DndProvider>
-          </PlannerStoreProvider>
+        <div className="flex justify-center">
+          <WrappedComponents>{children}</WrappedComponents>
         </div>
         </div>
       </body>

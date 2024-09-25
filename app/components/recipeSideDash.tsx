@@ -1,19 +1,35 @@
 'use client'
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 import { usePlannerStore } from "../../providers/planner-store-provider";
 import { RecipeTile } from "./recipeTile";
 
+import axios from "axios";
+
+
 export default function RecipeSideDash() {
+    const [ recipes2, setRecipes ] = useState([]);
     const [isOpen, setIsOpen] = useState(true);
     const { recipes } = usePlannerStore((state) => state)
+
+    useEffect(() => {
+        async function getRecipes() {
+            const data = await axios.get(
+                `${process.env.NEXT_PUBLIC_API_URL}/recipes/`
+            );
+
+            setRecipes(data.data.data);
+        }
+
+        getRecipes();
+    }, [])
+
     return <div className="relative min-h-screen">
         <div 
-            className={`${isOpen ? 'block' : 'hidden'} absolute min-h-screen border-r overflow-hidden border-black relative`}>
+            className={`${isOpen ? 'block' : 'hidden'} h-full absolute min-h-screen border-r overflow-hidden border-black relative`}>
             <div className="p-2 border-b border-black font-bold text-[16px]">Recipes</div>
             <div>
-                {Object.keys(recipes).map((recipeId) => {
-                    let recipe = recipes[recipeId]
+                {recipes2.map((recipe) => {
                     return <RecipeTile key={recipe.id} recipe={recipe}/>
                 })}
             </div>

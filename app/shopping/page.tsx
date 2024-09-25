@@ -72,14 +72,16 @@ export default function Shopping() {
   let totals = getTotalIngredients(planner);
   return (
     <main className="flex min-h-screen flex-col items-left p-12 max-w-[500px] w-full">
-      <h1 className="font-bold text-[24px]">Shopping List</h1>
-      {
-        Object.keys(totals).map((total, index) => {
-          return <div className="pr-3 pt-3 pb-3 flex" key={index}>
-            <input className="w-6 h-6" type="checkbox" id={`${total}check`}></input> <span className="pl-3">{totals[total].quantity.number} {totals[total].quantity.measurement} of {total}</span>
-          </div>
-        })
-      }
+      <div className="border border-black p-5 max-w-[800px]">
+        <h1 className="font-bold text-[24px]">Shopping List</h1>
+        { Object.keys(totals).length === 0 ? <div className="border border-dashed border-black p-4 mt-3 w-full">Looks like your planner is empty</div> :
+          Object.keys(totals).map((total, index) => {
+            return <div className="pr-3 pt-3 pb-3 flex" key={index}>
+              <input className="w-6 h-6" type="checkbox" id={`${total}check`}></input> <span className="pl-3">{totals[total].quantity.number} {totals[total].quantity.measurement} of {total}</span>
+            </div>
+          })
+        }
+      </div>
     </main>
   );
 }

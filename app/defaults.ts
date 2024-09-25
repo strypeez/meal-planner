@@ -2,9 +2,11 @@ import { Recipe } from "../stores/planner-store"
 import { Day } from "../stores/planner-store"
 
 export let defaultRecipes: { [key: string]: Recipe}= {
-    '1': {
+    'mapo-tofu': {
         id: '1',
         name: "Mapo Tofu",
+        slug: "mapo-tofu",
+        image: 'https://futuredish.com/wp-content/uploads/2020/02/Spicy-Tofu-1024x678.jpg',
         servings: 3,
         ingredients: [
             {
@@ -27,10 +29,12 @@ export let defaultRecipes: { [key: string]: Recipe}= {
             }
         ]
     },
-    '4':{
+    'bacon-pasta':{
         id: '4',
         name: 'Bacon Pasta',
         servings: 3,
+        slug: 'bacon-pasta',
+        image: 'https://www.recipetineats.com/tachyon/2017/05/Bacon-Tomato-Pasta-3.jpg?resize=1200%2C1680&zoom=0.5',
         ingredients: [
             {
                 id: '5',

@@ -10,23 +10,31 @@ import PlannerRecipe from "./plannerRecipe"
 type PlannerDropProps = {
     day: number,
     meal: string,
-    meals: Recipe[]
+    meals: Recipe[],
+    recipes: Recipe[],
+    daily: boolean
 }
 
-export default function PlannerDrop({day, meal, meals}: PlannerDropProps) {
-    const { getRecipe, addMeal, removeMeal } = usePlannerStore((state) => state)
+function getRecipe(recipes: Recipe[], slug: string): Recipe {
+    const recipe = recipes.find((recipe) => (recipe.slug === slug))
+    return recipe;
+}
+
+export default function PlannerDrop({day, meal, meals, recipes, daily = false}: PlannerDropProps) {
+    const { addMeal, removeMeal } = usePlannerStore((state) => state)
     const [{isOver}, drop] = useDrop(() => ({
         accept: ItemTypes.RECIPE,
-        drop: (item: {id: string}) => {
-            addMeal(day, meal, getRecipe(item.id))
+        drop: (item: {slug: string}) => {
+            addMeal(day, meal, getRecipe(recipes, item.slug))
         },
         collect: monitor => ({
             isOver: !!monitor.isOver(),
         })
-    }), [meals])
-    return <div ref={drop} className="p-3 flex flex-col">
+    }), [meals, recipes])
+
+    return <div ref={drop} className={`p-3 h-full ${daily ? 'grid grid-cols-2 gap-x-2': 'flex flex-col'} ${isOver ? 'bg-amber-100' : ''}`}>
         {
-            meals.length === 0 ? <div className="w-24 h-8"></div> : meals.map((recipe, index) => {
+            meals.length === 0 ? <div className="grow h-40"></div> : meals.map((recipe, index) => {
                 return <PlannerRecipe key={index} meal={meal} day={day} rIndex={index} recipe={recipe} removeMeal={removeMeal}/>
             })
         }
